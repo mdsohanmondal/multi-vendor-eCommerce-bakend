@@ -7,7 +7,7 @@ import {
   jsonb,
   integer,
 } from 'drizzle-orm/pg-core';
-import { Attributes } from './product.schema';
+import { Attribute } from '../../types/product.type';
 export const Subcategories = pgTable('subcategories', {
   id: serial('id').primaryKey(),
 
@@ -21,7 +21,7 @@ export const Subcategories = pgTable('subcategories', {
   isActive: boolean('is_active').default(true),
   displayOrder: serial('display_order'),
 
-  attributes: jsonb('attributes').$type<Attributes>(), // key-value attribute mapping
+  attributes: jsonb('attributes').$type<Attribute>(), // key-value attribute mapping
 
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
