@@ -8,4 +8,3 @@ export * from './category.schema';
 export * from './order.schema';
 export * from './product.schema';
 export * from './reviews.schema';
-export * from './subcategory.schema';
