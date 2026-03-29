@@ -15,6 +15,13 @@
       "when": 1774418002300,
       "tag": "0001_skinny_hellcat",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774676650517,
+      "tag": "0002_curious_stature",
+      "breakpoints": true
     }
   ]
 }
