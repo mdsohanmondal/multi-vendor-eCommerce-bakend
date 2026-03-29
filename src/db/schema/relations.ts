@@ -5,7 +5,6 @@ import { Address } from './address.schema';
 import { Users } from './user.schema';
 import { WishTable } from './whishList.schema';
 import { Categories } from './category.schema';
-import { Subcategories } from './subcategory.schema';
 import { Products } from './product.schema';
 
 // user all relations
@@ -54,18 +53,5 @@ export const reviewRelation = relations(Reviews, ({ one }) => ({
   product: one(Products, {
     fields: [Reviews.productId],
     references: [Products.id],
-  }),
-}));
-
-// one category multiple subcategory
-export const categoryRelations = relations(Categories, ({ many }) => ({
-  subcategories: many(Subcategories),
-}));
-
-// multiple subcategory to one parent main category
-export const subcategoryRelations = relations(Subcategories, ({ one }) => ({
-  parentCategory: one(Categories, {
-    fields: [Subcategories.parentCategoryId],
-    references: [Categories.id],
   }),
 }));
