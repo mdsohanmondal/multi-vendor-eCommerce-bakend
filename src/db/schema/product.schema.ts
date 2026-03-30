@@ -12,8 +12,10 @@ import {
   Dimensions,
   MetaData,
   ProductImage,
+  StockStatus,
 } from '../../types/product.type';
 import { Categories, Subcategories } from './category.schema';
+import { Vendors } from './vendor.schema';
 
 /* ------------------ Table ------------------ */
 
@@ -22,11 +24,14 @@ export const Products = pgTable('products', {
 
   /* Basic Info */
   name: text('name').notNull(),
-  slug: text('slug').notNull().unique(),
+  slug: text('slug').notNull(),
   description: text('description'),
   shortDescription: text('short_description'),
 
   /* Relations */
+  vendorId: integer('vendor_id')
+    .notNull()
+    .references(() => Vendors.id),
   categoryId: integer('category_id')
     .notNull()
     .references(() => Categories.id),
@@ -43,7 +48,9 @@ export const Products = pgTable('products', {
   /* Inventory */
   sku: text('sku'),
   stockQuantity: integer('stock_quantity'),
-  stockStatus: text('stock_status').default('instock'),
+  stockStatus: text('stock_status', {
+    enum: ['in_stock', 'out_of_stock', 'low_stock', 'preorder'],
+  }).default('in_stock'),
 
   /* Product Data */
   images: jsonb('images').$type<ProductImage[]>(),
