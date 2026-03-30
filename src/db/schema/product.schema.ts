@@ -12,7 +12,6 @@ import {
   Dimensions,
   MetaData,
   ProductImage,
-  StockStatus,
 } from '../../types/product.type';
 import { Categories, Subcategories } from './category.schema';
 import { Vendors } from './vendor.schema';
