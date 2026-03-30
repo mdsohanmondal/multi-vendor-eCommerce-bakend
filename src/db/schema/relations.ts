@@ -9,6 +9,7 @@ import { WishTable } from './whishList.schema';
 import { Products } from './product.schema';
 import { Categories, Subcategories } from './category.schema';
 import { Vendors } from './vendor.schema';
+import { OrderItems } from './orderItems.schema';
 
 /* =========================================================
    USER RELATIONS
@@ -24,7 +25,6 @@ export const userRelations = relations(Users, ({ many }) => ({
 /* =========================================================
    PRODUCT RELATIONS
 ========================================================= */
-
 export const productRelations = relations(Products, ({ one, many }) => ({
   vendor: one(Vendors, {
     fields: [Products.vendorId],
@@ -42,6 +42,29 @@ export const productRelations = relations(Products, ({ one, many }) => ({
   }),
 
   reviews: many(Reviews),
+
+  orderItems: many(OrderItems),
+}));
+
+/* =========================================================
+   Order Items RELATIONS
+========================================================= */
+
+export const orderItemsRelations = relations(OrderItems, ({ one }) => ({
+  order: one(Orders, {
+    fields: [OrderItems.orderId],
+    references: [Orders.id],
+  }),
+
+  product: one(Products, {
+    fields: [OrderItems.productId],
+    references: [Products.id],
+  }),
+
+  vendor: one(Vendors, {
+    fields: [OrderItems.vendorId],
+    references: [Vendors.id],
+  }),
 }));
 
 /* =========================================================
