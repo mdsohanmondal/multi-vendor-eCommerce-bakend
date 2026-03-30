@@ -8,6 +8,7 @@ import { WishTable } from './whishList.schema';
 
 import { Products } from './product.schema';
 import { Categories, Subcategories } from './category.schema';
+import { Vendors } from './vendor.schema';
 
 /* =========================================================
    USER RELATIONS
@@ -25,6 +26,11 @@ export const userRelations = relations(Users, ({ many }) => ({
 ========================================================= */
 
 export const productRelations = relations(Products, ({ one, many }) => ({
+  vendor: one(Vendors, {
+    fields: [Products.vendorId],
+    references: [Vendors.id],
+  }),
+
   category: one(Categories, {
     fields: [Products.categoryId],
     references: [Categories.id],
